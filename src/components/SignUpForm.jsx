@@ -1,32 +1,51 @@
-import React, { useState } from "react";
+import React from "react";
+import Label from "./Label";
 import InputField from "./InputField";
 import Button from "./Button";
-import Label from "./Label";
+import { useState } from "react";
 
-function LoginForm({ setShowLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function SignUpForm({ setShowLogin }) {
+  let [userName, setUserName] = useState("");
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
 
   const handleOnClick = () => {
-    setShowLogin(false);
+    setShowLogin(true);
   };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    alert(email + ":" + password);
-    console.log("form submitted");
-  }
+
+    alert(`Hello ${userName}`);
+
+    console.log("User registered Successfully");
+  };
   return (
-    <>
+    <div>
       <form
         className="border-2 border-solid border-white rounded-lg flex flex-col gap-5 items-center p-10"
         onSubmit={handleSubmit}
       >
         <div>
+          <Label
+            value="Username"
+            htmlFor="username"
+            id="username"
+            name="username"
+          />
+          <InputField
+            type="text"
+            placeholder="Enter your username"
+            inputVal={userName}
+            setInputVal={setUserName}
+          />
+        </div>
+        <div>
           <Label value="Email" htmlFor="email" id="email" name="email" />
           <InputField
             type="email"
             placeholder="Enter your email"
+            name="email"
             inputVal={email}
             setInputVal={setEmail}
           />
@@ -40,23 +59,23 @@ function LoginForm({ setShowLogin }) {
           />
           <InputField
             type="password"
-            placeholder="Enter your email"
-            name="email"
+            placeholder="Enter your password"
+            name="password"
             inputVal={password}
             setInputVal={setPassword}
           />
         </div>
 
-        <Button text="Login" />
+        <Button text="Sign In" />
         <p className="text-white">
-          New to Dented Code?{" "}
+          Already Have an account?{" "}
           <button type="button" onClick={handleOnClick}>
-            Sign Up
+            Login
           </button>
         </p>
       </form>
-    </>
+    </div>
   );
 }
 
-export default LoginForm;
+export default SignUpForm;

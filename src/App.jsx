@@ -2,8 +2,11 @@ import "./index.css";
 import "./App.css";
 import LoginForm from "./components/LoginForm";
 import Welcome from "./components/Welcome";
+import SignUpForm from "./components/SignUpForm";
+import { useState } from "react";
 
 function App() {
+  const [showLogin, setShowLogin] = useState(true);
   return (
     <>
       <div className="bg-black h-screen flex items-center justify-center flex-col gap-4 ">
@@ -12,7 +15,11 @@ function App() {
           className="h-auto max-w-full w-96"
         />
         <Welcome title="Dented Code Academy" />
-        <LoginForm />
+        {showLogin ? (
+          <LoginForm setShowLogin={setShowLogin} />
+        ) : (
+          <SignUpForm setShowLogin={setShowLogin} />
+        )}
       </div>
     </>
   );
